@@ -10,27 +10,37 @@ import {
 } from "react-router-dom";
 import Destination from './Components/Destination/Destination';
 import Login from './Components/Login/Login';
+import { createContext, useState } from 'react';
+import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
 
-
+export const userContext = createContext();
 function App() {
+  const [loggedInUser, setLoggedInUser] = useState({
+    isLoggedIn: false,
+    name: '',
+    email: '',
+    photo: ''
+  });
   return (
+    <userContext.Provider value={[loggedInUser, setLoggedInUser]}>
     <Router>
       <Header></Header>
       <Switch>
         <Route exact path='/'>
           <Home></Home>
         </Route>
-        <Route path='/destination/:type'>
+        <ProtectedRoute path='/destination/:type'>
           <Destination></Destination>
-        </Route>
-        <Route path='/destination'>
+        </ProtectedRoute>
+        <ProtectedRoute path='/destination'>
           <Destination></Destination>
-        </Route>
+        </ProtectedRoute>
         <Route path='/login'>
           <Login></Login>
         </Route>
       </Switch>
     </Router>
+    </userContext.Provider>
   );
 }
 
