@@ -4,6 +4,7 @@ import card from '../data/cards.json';
 import map from '../../images/Map.png';
 
 import {MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import Mymap from '../Mymap/Mymap';
 
 
 
@@ -70,14 +71,7 @@ const Destination = () => {
           }
         </div>
         <div style={{height:'100%', width:'100%'}} className="col-md-8 d-block" id="mapid">
-          <p className="text-white">I can't seem to load the map, it appears invisible. This is image</p>
-          <img className="w-75 h-75" src={map} alt=""/>
-        <MapContainer center={[45.4, -75.7]} zoom={12}>
-        <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-      />
-        </MapContainer>
+          <Mymap></Mymap>
         </div>
       </div>
     </div>
