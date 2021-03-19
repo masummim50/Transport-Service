@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 import card from '../data/cards.json';
 import map from '../../images/Map.png';
 
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import {MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 
 
@@ -26,7 +26,6 @@ const Destination = () => {
     const destination = e.target.value;
     setDestination(destination)
   };
-  const position = [51.505, -0.09]
 
   return (
     <div className="container">
@@ -34,38 +33,51 @@ const Destination = () => {
         <div className="col-md-4">
           
           {search ? <div>
+            <label htmlFor="" className="text-white">Your travel plan:</label>
             <div className="travel-info bg-danger text-white text-center p-1 rounded mb-2">
             <p>{location}</p>
             <p>To</p>
             <p className="mb-1">{destination}</p>
             </div>
+            <label htmlFor="" className="text-white">Details:</label>
             <div className="price-info bg-white p-3 rounded">
+              
               <div className="small-vehicle d-flex justify-content-between align-items-center">
                 <img className='w-25' src={myvehicle.url} alt=""/>
+                <h6>{myvehicle.type}</h6>
                 <h6>{myvehicle.price}</h6>
               </div>
               <div className="small-vehicle d-flex justify-content-between align-items-center">
                 <img className='w-25' src={myvehicle.url} alt=""/>
+                <h6>{myvehicle.type}</h6>
                 <h6>{myvehicle.price}</h6>
               </div>
               <div className="small-vehicle d-flex justify-content-between align-items-center">
                 <img className='w-25' src={myvehicle.url} alt=""/>
+                <h6>{myvehicle.type}</h6>
                 <h6>{myvehicle.price}</h6>
               </div>
             </div>
           </div>: 
-          <div><input onBlur={getLocation} required className='form-control' type="text" name="topick" id="" placeholder="Your location"/>
-          <input onBlur={getDestination} required className="form-control" type="text" name="todrop" id="" placeholder="destination"/>
-          <button onClick={()=> location && destination && setSearch(!search)} className="btn btn-primary form-control">Search</button></div>
+          <div>
+            <label className='text-white' htmlFor="">Your Location:</label>
+            <input onBlur={getLocation} required className='form-control' type="text" name="topick" id="" placeholder="Your location"/>
+            <label className='text-white' htmlFor="">Where you want to go:</label>
+          <input onBlur={getDestination} required className="form-control" type="text" name="todrop" id="" placeholder="Destination"/>
+          <label className='text-white' htmlFor="">Choose a date for your Travel</label>
+          <input className="form-control" type="date" name="" id=""/>
+          <button onClick={()=> location && destination && setSearch(!search)} className="btn btn-primary form-control mt-2">Search Transport</button></div>
           }
         </div>
-        <div style={{height:'1000px'}} className="col-md-8" id="mapid">
-        <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
-    <TileLayer
-      attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-    />
-  </MapContainer>
+        <div style={{height:'100%', width:'100%'}} className="col-md-8 d-block" id="mapid">
+          <p className="text-white">I can't seem to load the map, it appears invisible. This is image</p>
+          <img className="w-75 h-75" src={map} alt=""/>
+        <MapContainer center={[45.4, -75.7]} zoom={12}>
+        <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+      />
+        </MapContainer>
         </div>
       </div>
     </div>
