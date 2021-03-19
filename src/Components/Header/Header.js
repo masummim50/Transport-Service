@@ -18,17 +18,38 @@ const Header = () => {
   }
   const [loggedInUser, setLoggedInUser] = useContext(userContext);
   return (
-    <div className="container d-flex justify-content-between align-items-center justify-content-center flex-sm-column flex-xs-column flex-md-row">
-      <div className="logo"><h6 className="text-white">logo here</h6>
-      <p className="text-white">Get where you need to go</p></div>
-      <div className="links">
-        <Link to='/' className="btn btn-sm m-1 text-white">Home</Link>
-        <Link to='/destination/Car' className="btn btn-sm text-white">Destination</Link>
-        <a href="" className="btn text-white btn-sm">Home</a>
-        {loggedInUser.isLoggedIn ? <Link onClick={handleSignOut} to='/' className="btn btn-danger">Log out</Link> : 
-        <Link to='/login' className="btn btn-sm btn-primary">Login</Link>}
-      </div>
+    <header class=" text-white">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+          <Link to='/' class="navbar-brand w-50" href="#">
+            <h2 className="text-white">Transport Service</h2><span className="text-white">Get where you need to go</span>
+            
+          </Link>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item ms-3">
+        <Link to='/' className="nav-link btn text-white btn-outline-info">Home</Link>
+              </li>
+              <li class="nav-item ms-3">
+        <Link to='/destination/Car' className="nav-link btn text-white btn-outline-success">Destination</Link>
+              </li>
+              <li class="nav-item ms-3">
+                <a class="nav-link text-white btn btn-outline-warning" href="#about">About us</a>
+              </li>
+              <li class="nav-item ms-3">
+        {loggedInUser.isLoggedIn ? <Link onClick={handleSignOut} to='/' className="nav-link btn btn-outline-danger text-white">Log out</Link> : 
+        <Link to='/login' className="nav-link btn btn-outline-primary text-white">Login</Link>}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </div>
+  </header>
   );
 };
 

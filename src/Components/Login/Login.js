@@ -12,7 +12,8 @@ if (!firebase.apps.length) {
 }
 
 const Login = () => {
-  const history = useHistory()
+  const history = useHistory();
+  const [signUpError, setSignUpError] = useState(false);
   const location = useLocation();
   const {from} = location.state || {from : {pathname : '/'}};
   const [loggedInUser, setLoggedInUser] = useContext(userContext);
@@ -48,7 +49,9 @@ const Login = () => {
         console.log(res)
         setSignIn(!signIn)
       }).catch(error => console.log(error))
-    }
+    }else{setSignUpError(true); setTimeout(() => {
+      setSignUpError(false)
+    }, 2000);}
     e.preventDefault();
   }
   const handleSignIn = (e) => {
@@ -63,7 +66,7 @@ const Login = () => {
       }
       setLoggedInUser(gotUser)
       history.replace(from)
-    }).catch(error=> console.log(error));
+    }).catch(error=> console.log(error.message));
     e.preventDefault();
   }
 
@@ -85,7 +88,7 @@ const Login = () => {
   const [signIn, setSignIn] = useState(false);
   return (
     
-    <div className="bg-dark p-5 mx-auto mt-5 mb-5 text-white w-sm-75  w-50 text-center rounded">
+    <div className="bg-dark p-3 mx-auto mt-2 mb-5 text-white w-75 text-center rounded">
       {loggedInUser.isLoggedIn ? <div>Hello {loggedInUser.name} you are logged in</div> : 
       <div>
         
@@ -95,9 +98,10 @@ const Login = () => {
       <form action="">
         <div>
           <input onBlur={handleBlur} placeholder="Your email" type="email" name="email" className="form-control mb-3"/>
-          <input onBlur={handleBlur} type="password" name="password" placeholder="enter your password" className="form-control mb-3" id=""/>
+          <input onBlur={handleBlur} type="password" name="password" placeholder="Password - at least one digit" className="form-control mb-3" id=""/>
           
           {signIn ? <> <input onBlur={handleBlur} type="password" className="form-control mb-3" name="password2" id="" placeholder="Re-type Password"/>
+          {signUpError && <p className='text-warning'>something wrong with your inputs</p>}
           <input onClick={handleSubmit} type="submit" value="Sign Up" className="btn btn-success form-control"/></> : 
           <input onClick={handleSignIn} type="submit" value="Log In" className="bg-primary form-control mb-3"/> }
         </div>
