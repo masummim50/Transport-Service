@@ -9,7 +9,7 @@ const Home = () => {
       
     <div className="container">
       <div className="row mt-5">
-        {vehicles.map(v => <Card v ={v}></Card> )}
+        {vehicles.map(vehicle => <Card vehicle ={vehicle}></Card> )}
       </div>
     </div>
     </div>
